@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useFela } from "react-fela";
+import { Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { quizContainer, quizHeader } from "./styles";
+import { homePage } from "./pages/homePage";
+import { customQuizPage } from "./pages/customQuizPage";
 
-export default App;
+export const App: React.FC = React.memo(() => {
+	const { css } = useFela();
+
+	return (
+		<div className={css(quizContainer)} id='quiz'>
+			<div className={css(quizHeader)}>
+				<Route component={homePage} path='/' exact />
+				<Route component={customQuizPage} path='/customQuiz' />
+			</div>
+		</div>
+	);
+});
